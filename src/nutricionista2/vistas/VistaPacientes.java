@@ -28,12 +28,12 @@ public class VistaPacientes extends javax.swing.JInternalFrame {
     public VistaPacientes() {
         initComponents();
         try {
-        conexion = new Conexion("jdbc:mysql://localhost/nutricionista2", "root", "");
-        pacienteData = new PacienteData(conexion);
+            conexion = new Conexion("jdbc:mysql://localhost/nutricionista2", "root", "");
+            pacienteData = new PacienteData(conexion);
         
-    } catch (ClassNotFoundException ex) {
-        Logger.getLogger(VistaPacientes.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VistaPacientes.class.getName()).log(Level.SEVERE, null, ex);
+        }
     
     }
 
@@ -142,18 +142,15 @@ public class VistaPacientes extends javax.swing.JInternalFrame {
                     .addComponent(jLabel4)
                     .addComponent(jLabel5))
                 .addGap(49, 49, 49)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtDni)
-                            .addComponent(jtNombre)
-                            .addComponent(jtDomicilio))
-                        .addGap(62, 62, 62))
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jtId, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btBuscar)
-                        .addGap(25, 25, 25))))
+                        .addGap(27, 27, 27)
+                        .addComponent(btBuscar))
+                    .addComponent(jtNombre)
+                    .addComponent(jtDni)
+                    .addComponent(jtDomicilio))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
