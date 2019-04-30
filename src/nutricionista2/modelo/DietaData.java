@@ -71,33 +71,33 @@ public class DietaData {
         
     }
     
-//    public List<Comida> obtenerComidasXPaciente(int idPaciente){
-//        List<Comida> comidas = new ArrayList<>();
-//            
-//
-//        try {
-//            String sql = "SELECT * FROM paciente, dieta, comida WHERE paciente.idPaciente = dieta.idPaciente AND dieta.idComida = comida.idComida AND paciente.idPaciente =?;";
-//            PreparedStatement statement = connection.prepareStatement(sql);
-//            statement.setInt(1, idPaciente);
-//            ResultSet resultSet = statement.executeQuery();
-//            Comida comida;
-//            while(resultSet.next()){
-//                comida = new Comida();
-//                comida.setId(resultSet.getInt("idComida"));
-//                comida.setNombre(resultSet.getString("nombre"));
-//                comida.setDetalle(resultSet.getString("detalle"));
-//                comida.setCalorias(resultSet.getDouble("calorias"));
-//                
-//                comidas.add(comida);
-//            }      
-//            statement.close();
-//        } catch (SQLException ex) {
-//            System.out.println("Error al obtener las comidas: " + ex.getMessage());
-//        }
-//        
-//        
-//        return comidas;
-//    }
+    public List<Comida> obtenerComidasXPaciente(int idPaciente){
+        List<Comida> comidas = new ArrayList<>();
+            
+
+        try {
+            String sql = "SELECT comida.idComida, comida.nombre, comida.detalle, comida.calorias FROM paciente, dieta, dieta_comida, comida WHERE paciente.idPaciente = dieta.idPaciente AND dieta.idDieta = dieta_comida.idDieta AND dieta_comida.idComida = comida.idComida AND paciente.idPaciente =?;";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, idPaciente);
+            ResultSet resultSet = statement.executeQuery();
+            Comida comida;
+            while(resultSet.next()){
+                comida = new Comida();
+                comida.setId(resultSet.getInt("idComida"));
+                comida.setNombre(resultSet.getString("nombre"));
+                comida.setDetalle(resultSet.getString("detalle"));
+                comida.setCalorias(resultSet.getDouble("calorias"));
+                
+                comidas.add(comida);
+            }      
+            statement.close();
+        } catch (SQLException ex) {
+            System.out.println("Error al obtener las comidas: " + ex.getMessage());
+        }
+        
+        
+        return comidas;
+    }
 //    
     
     public Paciente buscarPaciente(int id){
@@ -250,6 +250,37 @@ public class DietaData {
 
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setInt(1, id);
+           
+            
+            ResultSet resultSet=statement.executeQuery();
+            
+            while(resultSet.next()){
+                dieta = new Dieta();
+                dieta.setId(resultSet.getInt("idDieta"));
+                dieta.setPaciente(buscarPaciente(resultSet.getInt("idPaciente")));
+                dieta.setFechaInicial(resultSet.getDate("fechaInicial").toLocalDate());
+                dieta.setFechaFinal(resultSet.getDate("fechaFinal").toLocalDate());
+                dieta.setPesoInicial(resultSet.getDouble("pesoInicial"));
+                dieta.setPesoBuscado(resultSet.getDouble("pesoBuscado"));
+            }      
+            statement.close();
+         
+        } catch (SQLException ex) {
+            System.out.println("Error al encontrar una comida: " + ex.getMessage());
+        }
+        
+        return dieta;
+    }
+    
+    public Dieta buscarDietaXPaciente(int idPaciente){
+    
+    Dieta dieta = null;
+    try {
+            
+            String sql = "SELECT * FROM dieta WHERE idPaciente =?;";
+
+            PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            statement.setInt(1, idPaciente);
            
             
             ResultSet resultSet=statement.executeQuery();

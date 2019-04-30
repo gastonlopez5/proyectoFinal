@@ -30,6 +30,7 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenu4 = new javax.swing.JMenu();
         escritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
@@ -38,6 +39,10 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
+        mDieta = new javax.swing.JMenuItem();
+
+        jMenu4.setText("jMenu4");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,6 +93,18 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
+        jMenu5.setText("Dietas");
+
+        mDieta.setText("Armar Dieta");
+        mDieta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mDietaActionPerformed(evt);
+            }
+        });
+        jMenu5.add(mDieta);
+
+        jMenuBar1.add(jMenu5);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -129,6 +146,16 @@ public class Principal extends javax.swing.JFrame {
         escritorio.moveToFront(vc);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void mDietaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mDietaActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();   // para limpiar todos los formularios
+        escritorio.repaint();
+        VistaDieta vd = new VistaDieta();
+        vd.setVisible(true);
+        escritorio.add(vd);
+        escritorio.moveToFront(vd);
+    }//GEN-LAST:event_mDietaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -169,9 +196,12 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem mDieta;
     // End of variables declaration//GEN-END:variables
 }

@@ -26,7 +26,7 @@ public class Nutricionista2 {
             conexion = new Conexion("jdbc:mysql://localhost/nutricionista2", "root", "");
             
             // ABM Paciente
-//              PacienteData pacienteData = new PacienteData(conexion);
+              PacienteData pacienteData = new PacienteData(conexion);
               
             // Alta de un Paciente
 //              
@@ -45,7 +45,13 @@ public class Nutricionista2 {
 //              
 //              pacienteData.borrarPaciente(paciente.getId());
 
+            // Consulta a la base de datos del listado de pacientes
+//            pacienteData.obtenerPacientes().forEach(p -> {
+//                  System.out.println("Nombre del paciente: " + p.getNombre());
+//              });
+
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++              
+
             // ABM Comida
 //            ComidaData comidaData = new ComidaData(conexion);
             
@@ -124,12 +130,25 @@ public class Nutricionista2 {
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
 
             // Consulta a la BD de sobre la cantidad de calorias que un paciente consume en la dieta
-            DietaData dietaData = new DietaData(conexion);
+//            DietaData dietaData = new DietaData(conexion);
 //            
-            System.out.println("Cantidad de calorias de la dieta: " + dietaData.obtenerCaloriasXPaciente(2)); 
+//            System.out.println("Cantidad de calorias de la dieta: " + dietaData.obtenerCaloriasXPaciente(2)); 
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
             
+            // Consulta a la base de datos sobre la lista de comidas por paciente
+//            DietaData dietaData = new DietaData(conexion);
+//            
+//            dietaData.obtenerComidasXPaciente(2).forEach(comida -> {
+//              System.out.println("Nombre de la comida: " + comida.getNombre());
+//            });
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+            
+            // Pruebas 
+//            int[] prueba;
+            
+        
         } catch (Exception e) {
                 System.out.println("Error al instanciar la clase conexion: " + e.getMessage());
         }
