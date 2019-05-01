@@ -112,11 +112,11 @@ public class Nutricionista2 {
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             // Consulta a la BD de los pacientes que al día de la fecha no alcanzaron el pesoBuscado
-//            DietaData dietaData = new DietaData(conexion);
-//            
-//            dietaData.obtenerPacientesQueNoCumplieronPesoBuscado().forEach(paciente -> {
-//              System.out.println("Nombre del paciente: " + paciente.getNombre());
-//            });
+            DietaData dietaData = new DietaData(conexion);
+            
+            dietaData.obtenerPacientesQueNoCumplieronPesoBuscado().forEach(paciente -> {
+              System.out.println("Nombre del paciente: " + paciente.getNombre());
+            });
             
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             // Consulta a la BD de los pacientes que quieren bajar una cantidad mayor a número determinado
