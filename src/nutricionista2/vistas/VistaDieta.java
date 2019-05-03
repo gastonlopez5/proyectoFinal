@@ -327,29 +327,61 @@ public class VistaDieta extends javax.swing.JInternalFrame {
 
     private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
         // TODO add your handling code here:
-        int filaSeleccionada = jtTablaComidasNoSelec.getSelectedRow();
+//        int filaSeleccionada = jtTablaComidasNoSelec.getSelectedRow();
+//        
+//        if(filaSeleccionada != -1){
+//        
+//            int idComida=(Integer)modeloComidasNoSelec.getValueAt(filaSeleccionada,0);
+//            
+//            Comida c = dietaData.buscarComida(idComida);
+//            listaComidasXPaciente.add(c);
+//            cargarComidasNoSelec();
+//            cargarComidasSelec();
+//            jbQuitar.setEnabled(true);
+           int[] filasSeleccionadas = jtTablaComidasNoSelec.getSelectedRows();
         
-        if(filaSeleccionada != -1){
+            if(filasSeleccionadas.length > 0){
         
-            int idComida=(Integer)modeloComidasNoSelec.getValueAt(filaSeleccionada,0);
+                for(int i=0;i<filasSeleccionadas.length;i++){
+                    int filaSeleccionada = filasSeleccionadas[i];
+                    int idComida=(Integer)modeloComidasNoSelec.getValueAt(filaSeleccionada,0);
             
-            Comida c = dietaData.buscarComida(idComida);
-            listaComidasXPaciente.add(c);
-            cargarComidasNoSelec();
-            cargarComidasSelec();
-            jbQuitar.setEnabled(true);
-        }
+                    Comida c = dietaData.buscarComida(idComida);
+                    listaComidasXPaciente.add(c);
+                    cargarComidasNoSelec();
+                    cargarComidasSelec();
+                    jbQuitar.setEnabled(true);
+                }
+            }
     }//GEN-LAST:event_jbAgregarActionPerformed
 
     private void jbQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbQuitarActionPerformed
         // TODO add your handling code here:
-        int filaSeleccionada = (Integer)jtTablaComidasSelec.getSelectedRow();
-        int idComida = (Integer)modeloComidasSelec.getValueAt(filaSeleccionada,0);
+//        int filaSeleccionada = (Integer)jtTablaComidasSelec.getSelectedRow();
+//        listaComidasNueva3 = (ArrayList)listaComidasXPaciente.clone();
+//        
+//        int idComida = (Integer)modeloComidasSelec.getValueAt(filaSeleccionada,0);
+//        
+//        for (Comida item:listaComidasNueva3){
+//            if (item.getId() == idComida){
+//                listaComidasXPaciente.remove(item);
+//            }
+//        }
+//        
+//        cargarComidasNoSelec();
+//        cargarComidasSelec();
+//        listaComidasNueva3.clear();
+
+        int[] filasSeleccionadas = jtTablaComidasSelec.getSelectedRows();
         listaComidasNueva3 = (ArrayList)listaComidasXPaciente.clone();
         
-        for (Comida item:listaComidasNueva3){
-            if (item.getId() == idComida){
-                listaComidasXPaciente.remove(item);
+        for (int i=0;i<filasSeleccionadas.length;i++){
+            int idComida = (Integer)modeloComidasSelec.getValueAt(filasSeleccionadas[i],0);
+        
+            for (Comida item:listaComidasNueva3){
+                if (item.getId() == idComida){
+                    listaComidasXPaciente.remove(item);
+                }
             }
         }
         
