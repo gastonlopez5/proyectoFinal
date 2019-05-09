@@ -338,21 +338,21 @@ public class VistaDieta extends javax.swing.JInternalFrame {
 //            cargarComidasNoSelec();
 //            cargarComidasSelec();
 //            jbQuitar.setEnabled(true);
-           int[] filasSeleccionadas = jtTablaComidasNoSelec.getSelectedRows();
+            int[] filasSeleccionadas = jtTablaComidasNoSelec.getSelectedRows();
         
-            if(filasSeleccionadas.length > 0){
-        
-                for(int i=0;i<filasSeleccionadas.length;i++){
-                    int filaSeleccionada = filasSeleccionadas[i];
-                    int idComida=(Integer)modeloComidasNoSelec.getValueAt(filaSeleccionada,0);
-            
-                    Comida c = dietaData.buscarComida(idComida);
-                    listaComidasXPaciente.add(c);
-                    cargarComidasNoSelec();
-                    cargarComidasSelec();
-                    jbQuitar.setEnabled(true);
-                }
+            for(int i=0;i<filasSeleccionadas.length;i++){
+                int filaSeleccionada = filasSeleccionadas[i];
+                int idComida=(Integer)modeloComidasNoSelec.getValueAt(filaSeleccionada,0);
+
+                Comida c = dietaData.buscarComida(idComida);
+                listaComidasXPaciente.add(c);
+
             }
+            
+            cargarComidasNoSelec();
+            cargarComidasSelec();
+            jbQuitar.setEnabled(true);
+            
     }//GEN-LAST:event_jbAgregarActionPerformed
 
     private void jbQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbQuitarActionPerformed
