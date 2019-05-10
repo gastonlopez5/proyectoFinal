@@ -5,6 +5,7 @@
  */
 package nutricionista2.vistas;
 
+import java.awt.Image;
 import javax.swing.JFrame;
 import nutricionista2.vistas.VistaConsulta1;
 
@@ -132,7 +133,7 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu7.add(jMenuItem5);
 
-        jMenuItem6.setText("Pacientes que desean bajar mas de una cantidad de kilos");
+        jMenuItem6.setText("Pacientes que desean bajar mas de una cantidad determinada de kilos");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem6ActionPerformed(evt);

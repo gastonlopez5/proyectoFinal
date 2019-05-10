@@ -30,7 +30,11 @@ public class VistaPacientes extends javax.swing.JInternalFrame {
         try {
             conexion = new Conexion("jdbc:mysql://localhost/nutricionista2", "root", "");
             pacienteData = new PacienteData(conexion);
-        
+            
+            jbBorrar.setEnabled(false);
+            jbActualizar.setEnabled(false);
+            jbLimpiar.setEnabled(false);
+            
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(VistaPacientes.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -60,11 +64,13 @@ public class VistaPacientes extends javax.swing.JInternalFrame {
         jtDomicilio = new javax.swing.JTextField();
         jtCelular = new javax.swing.JTextField();
         jtPeso = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jbGuardar = new javax.swing.JButton();
+        jbBorrar = new javax.swing.JButton();
+        jbActualizar = new javax.swing.JButton();
+        jbLimpiar = new javax.swing.JButton();
         btBuscar = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        jtMensaje = new javax.swing.JTextField();
 
         jTextField5.setText("jTextField5");
 
@@ -95,31 +101,31 @@ public class VistaPacientes extends javax.swing.JInternalFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("PESO ACTUAL:");
 
-        jButton1.setText("GUARDAR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jbGuardar.setText("GUARDAR");
+        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jbGuardarActionPerformed(evt);
             }
         });
 
-        jButton2.setText("BORRAR");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jbBorrar.setText("BORRAR");
+        jbBorrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jbBorrarActionPerformed(evt);
             }
         });
 
-        jButton3.setText("ACTUALIZAR");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jbActualizar.setText("ACTUALIZAR");
+        jbActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jbActualizarActionPerformed(evt);
             }
         });
 
-        jButton4.setText("LIMPIAR");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jbLimpiar.setText("LIMPIAR");
+        jbLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jbLimpiarActionPerformed(evt);
             }
         });
 
@@ -130,54 +136,62 @@ public class VistaPacientes extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
+        jLabel8.setText("ESTADO:");
+
+        jtMensaje.setForeground(new java.awt.Color(255, 0, 51));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
-                .addGap(49, 49, 49)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jtId, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(btBuscar))
-                    .addComponent(jtNombre)
-                    .addComponent(jtDni)
-                    .addComponent(jtDomicilio))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(jLabel6))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton1)))
+                .addGap(33, 33, 33)
+                .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel7)
-                    .addComponent(jButton3))
+                .addComponent(jtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
+                .addComponent(jLabel7)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtPeso)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton4)
-                        .addGap(0, 5, Short.MAX_VALUE)))
+                .addComponent(jtPeso)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(137, 137, 137))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
+                        .addGap(49, 49, 49)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jtId, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(27, 27, 27)
+                                .addComponent(btBuscar))
+                            .addComponent(jtNombre)
+                            .addComponent(jtDni)
+                            .addComponent(jtDomicilio)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jbGuardar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbBorrar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbActualizar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jbLimpiar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel8)
+                        .addGap(18, 18, 18)
+                        .addComponent(jtMensaje)))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,13 +221,17 @@ public class VistaPacientes extends javax.swing.JInternalFrame {
                     .addComponent(jLabel7)
                     .addComponent(jtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
-                .addContainerGap())
+                    .addComponent(jbGuardar)
+                    .addComponent(jbBorrar)
+                    .addComponent(jbActualizar)
+                    .addComponent(jbLimpiar))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jtMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12))
         );
 
         pack();
@@ -224,54 +242,87 @@ public class VistaPacientes extends javax.swing.JInternalFrame {
         int id = Integer.parseInt(jtId.getText());
         Paciente paciente = pacienteData.buscarPaciente(id);
         if(paciente != null){
-                jtId.setText(paciente.getId()+"");
-                jtNombre.setText(paciente.getNombre());
-                jtDni.setText(paciente.getDni());
-                jtDomicilio.setText(paciente.getDomicilio());
-                jtCelular.setText(paciente.getCelular());
-                jtPeso.setText(paciente.getPesoActual()+"");
+            jbBorrar.setEnabled(true);
+            jbActualizar.setEnabled(true);
+            jbLimpiar.setEnabled(true);
+            
+            jtMensaje.setText("");
+            jtId.setText(paciente.getId()+"");
+            jtNombre.setText(paciente.getNombre());
+            jtDni.setText(paciente.getDni());
+            jtDomicilio.setText(paciente.getDomicilio());
+            jtCelular.setText(paciente.getCelular());
+            jtPeso.setText(paciente.getPesoActual()+"");
+        }else{
+            jtNombre.setText("");
+            jtDni.setText("");
+            jtDomicilio.setText("");
+            jtCelular.setText("");
+            jtPeso.setText("");
+            jtMensaje.setText("PACIENTE NO ENCONTRADO. ID NO VALIDO");
         }
     }//GEN-LAST:event_btBuscarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         // TODO add your handling code here:
-        String nombre = jtNombre.getText();
-        String dni = jtDni.getText();
-        String domicilio = jtDomicilio.getText();
-        String celular = jtCelular.getText();
-        double peso = Double.parseDouble(jtPeso.getText());
-        
-        Paciente p = new Paciente(nombre, dni, domicilio, celular, peso);
-        pacienteData.guardarPaciente(p);
-        
-        jtId.setText(p.getId()+"");
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+        try{
+            jtMensaje.setText("");
+            String nombre = jtNombre.getText();
+            String dni = jtDni.getText();
+            String domicilio = jtDomicilio.getText();
+            String celular = jtCelular.getText();
+            double peso = Double.parseDouble(jtPeso.getText());
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+            Paciente p = new Paciente(nombre, dni, domicilio, celular, peso);
+            pacienteData.guardarPaciente(p);
+
+            jtId.setText(p.getId()+"");
+            jtMensaje.setText("PACIENTE GARDADO");
+            
+            jbBorrar.setEnabled(true);
+            jbActualizar.setEnabled(true);
+            jbLimpiar.setEnabled(true);
+            
+        }catch (NumberFormatException ex){
+            jtMensaje.setText("PACIENTE NO GUARDADO");
+        }
+    }//GEN-LAST:event_jbGuardarActionPerformed
+
+    private void jbBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBorrarActionPerformed
         // TODO add your handling code here:
         int id = Integer.parseInt(jtId.getText());
-        pacienteData.borrarPaciente(id);
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        if (jtId.getText()!= null){
+        
+        try{
+            pacienteData.borrarPaciente(id);
+        
+            jtMensaje.setText("PACIENTE BORRADO");
             
+        }catch (NullPointerException ex){
+            jtMensaje.setText("PACIENTE NO ENCONTRADO. ID NO VALIDO");
+        }
+    }//GEN-LAST:event_jbBorrarActionPerformed
+
+    private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
+        // TODO add your handling code here:
+        
+        try{
             int id = Integer.parseInt(jtId.getText());
             String nombre = jtNombre.getText();
             String dni = jtDni.getText();
             String domicilio = jtDomicilio.getText();
             String celular = jtCelular.getText();
             double peso = Double.parseDouble(jtPeso.getText());
-        
+
             Paciente p = new Paciente(id, nombre, dni, domicilio, celular, peso);
             pacienteData.actualizarPaciente(p);
-        
-        }
-    }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+            
+        }catch (NumberFormatException ex){
+            jtMensaje.setText("ERROR AL ACTUALIZAR PACIENTE");
+        }
+    }//GEN-LAST:event_jbActualizarActionPerformed
+
+    private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
         // TODO add your handling code here:
         jtId.setText("");
         jtNombre.setText("");
@@ -280,15 +331,11 @@ public class VistaPacientes extends javax.swing.JInternalFrame {
         jtCelular.setText("");
         jtPeso.setText("");
         
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jbLimpiarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btBuscar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -296,11 +343,17 @@ public class VistaPacientes extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField jTextField5;
+    private javax.swing.JButton jbActualizar;
+    private javax.swing.JButton jbBorrar;
+    private javax.swing.JButton jbGuardar;
+    private javax.swing.JButton jbLimpiar;
     private javax.swing.JTextField jtCelular;
     private javax.swing.JTextField jtDni;
     private javax.swing.JTextField jtDomicilio;
     private javax.swing.JTextField jtId;
+    private javax.swing.JTextField jtMensaje;
     private javax.swing.JTextField jtNombre;
     private javax.swing.JTextField jtPeso;
     // End of variables declaration//GEN-END:variables

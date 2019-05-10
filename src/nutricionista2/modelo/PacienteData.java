@@ -19,9 +19,12 @@ import java.util.List;
  */
 public class PacienteData {
     private Connection con;
+    private DietaData dietaData;
+    private Conexion conexion;
 
     public PacienteData(Conexion conexion) {
         try {
+            this.conexion=conexion;
             con = conexion.getConexion();
         } catch (SQLException ex) {
             System.out.println("Error al abrir al obtener la conexion");
@@ -87,7 +90,12 @@ public class PacienteData {
     }
     
     public void borrarPaciente(int id){
-    try {
+        
+        dietaData = new DietaData(conexion);
+        Dieta dieta = dietaData.buscarDietaXPaciente(id);
+        dietaData.borrarDietaDeUnPaciente(dieta.getId());
+        
+        try {
             
             String sql = "DELETE FROM paciente WHERE idPaciente =?;";
 
