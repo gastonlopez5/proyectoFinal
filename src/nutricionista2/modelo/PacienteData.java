@@ -93,7 +93,10 @@ public class PacienteData {
         
         dietaData = new DietaData(conexion);
         Dieta dieta = dietaData.buscarDietaXPaciente(id);
-        dietaData.borrarDietaDeUnPaciente(dieta.getId());
+        
+        if (dieta != null){
+            dietaData.borrarDietaDeUnPaciente(dieta.getId());
+        }
         
         try {
             

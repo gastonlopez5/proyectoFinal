@@ -272,16 +272,21 @@ public class VistaPacientes extends javax.swing.JInternalFrame {
             String domicilio = jtDomicilio.getText();
             String celular = jtCelular.getText();
             double peso = Double.parseDouble(jtPeso.getText());
-
-            Paciente p = new Paciente(nombre, dni, domicilio, celular, peso);
-            pacienteData.guardarPaciente(p);
-
-            jtId.setText(p.getId()+"");
-            jtMensaje.setText("PACIENTE GARDADO");
             
-            jbBorrar.setEnabled(true);
-            jbActualizar.setEnabled(true);
-            jbLimpiar.setEnabled(true);
+            if (!(nombre.isEmpty() || dni.isEmpty() || domicilio.isEmpty() || celular.isEmpty())){
+                Paciente p = new Paciente(nombre, dni, domicilio, celular, peso);
+                pacienteData.guardarPaciente(p);
+
+                jtId.setText(p.getId()+"");
+                jtMensaje.setText("PACIENTE GARDADO");
+            
+                jbBorrar.setEnabled(true);
+                jbActualizar.setEnabled(true);
+                jbLimpiar.setEnabled(true);
+            
+            }else{
+                jtMensaje.setText("PACIENTE NO GUARDADO");
+            }
             
         }catch (NumberFormatException ex){
             jtMensaje.setText("PACIENTE NO GUARDADO");
@@ -313,9 +318,13 @@ public class VistaPacientes extends javax.swing.JInternalFrame {
             String celular = jtCelular.getText();
             double peso = Double.parseDouble(jtPeso.getText());
 
-            Paciente p = new Paciente(id, nombre, dni, domicilio, celular, peso);
-            pacienteData.actualizarPaciente(p);
-
+            if (!(nombre.isEmpty() || dni.isEmpty() || domicilio.isEmpty() || celular.isEmpty())){
+                Paciente p = new Paciente(id, nombre, dni, domicilio, celular, peso);
+                pacienteData.actualizarPaciente(p);
+                jtMensaje.setText("PACIENTE ACTUALIZADO");
+            }else{
+                jtMensaje.setText("ERROR AL ACTUALIZAR PACIENTE");
+            }
             
         }catch (NumberFormatException ex){
             jtMensaje.setText("ERROR AL ACTUALIZAR PACIENTE");
@@ -330,6 +339,7 @@ public class VistaPacientes extends javax.swing.JInternalFrame {
         jtDomicilio.setText("");
         jtCelular.setText("");
         jtPeso.setText("");
+        jtMensaje.setText("");
         
     }//GEN-LAST:event_jbLimpiarActionPerformed
 

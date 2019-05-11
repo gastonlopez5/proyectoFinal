@@ -28,6 +28,10 @@ public class VistaComidas extends javax.swing.JInternalFrame {
         try {
             conexion = new Conexion("jdbc:mysql://localhost/nutricionista2", "root", "");
             comidaData = new ComidaData(conexion);
+            
+            btActualizar.setEnabled(false);
+            btBorrar.setEnabled(false);
+            btLimpiar.setEnabled(false);
         
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(VistaComidas.class.getName()).log(Level.SEVERE, null, ex);
@@ -58,6 +62,8 @@ public class VistaComidas extends javax.swing.JInternalFrame {
         btLimpiar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtDetalle = new javax.swing.JTextArea();
+        jLabel6 = new javax.swing.JLabel();
+        jtMensaje = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -118,48 +124,50 @@ public class VistaComidas extends javax.swing.JInternalFrame {
         jtDetalle.setRows(5);
         jScrollPane1.setViewportView(jtDetalle);
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
+        jLabel6.setText("ESTADO:");
+
+        jtMensaje.setForeground(new java.awt.Color(255, 0, 51));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(202, 202, 202))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)))
-                    .addGroup(layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jLabel6)
                         .addGap(37, 37, 37)
-                        .addComponent(btGuardar)))
-                .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jtMensaje))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(btGuardar)
+                        .addGap(37, 37, 37)
+                        .addComponent(btActualizar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btBorrar)
+                        .addGap(33, 33, 33)
+                        .addComponent(btLimpiar))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jtId, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btBuscar))
-                            .addComponent(jtNombre)
-                            .addComponent(jScrollPane1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(btBorrar)
-                                    .addComponent(jtCalorias, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(98, 98, 98))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btActualizar)
-                        .addGap(32, 32, 32)
-                        .addComponent(btLimpiar)
-                        .addGap(28, 28, 28))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtCalorias, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(38, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(188, 188, 188))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,8 +177,8 @@ public class VistaComidas extends javax.swing.JInternalFrame {
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btBuscar))
+                    .addComponent(btBuscar)
+                    .addComponent(jtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -179,17 +187,21 @@ public class VistaComidas extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jtCalorias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btGuardar)
-                    .addComponent(btBorrar)
                     .addComponent(btActualizar)
+                    .addComponent(btBorrar)
                     .addComponent(btLimpiar))
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jtMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25))
         );
 
         pack();
@@ -200,23 +212,44 @@ public class VistaComidas extends javax.swing.JInternalFrame {
         int id = Integer.parseInt(jtId.getText());
         Comida c = comidaData.buscarComida(id);
         if(c != null){
-                jtId.setText(c.getId()+"");
-                jtNombre.setText(c.getNombre());
-                jtDetalle.setText(c.getDetalle());
-                jtCalorias.setText(c.getCalorias()+"");
+            jtId.setText(c.getId()+"");
+            jtNombre.setText(c.getNombre());
+            jtDetalle.setText(c.getDetalle());
+            jtCalorias.setText(c.getCalorias()+"");
+
+            btActualizar.setEnabled(true);
+            btBorrar.setEnabled(true);
+            btLimpiar.setEnabled(true);
+        }else{
+            jtNombre.setText("");
+            jtDetalle.setText("");
+            jtCalorias.setText("");
+            
+            jtMensaje.setText("COMIDA NO ENCONTRADA. ID NO VALIDO");
         }
     }//GEN-LAST:event_btBuscarActionPerformed
 
     private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
         // TODO add your handling code here:
-        String nombre = jtNombre.getText();
-        String detalle = jtDetalle.getText();
-        double calorias = Double.parseDouble(jtCalorias.getText());
-        
-        Comida c = new Comida(nombre, detalle, calorias);
-        comidaData.guardarComida(c);
-        
-        jtId.setText(c.getId()+"");
+        try{
+            String nombre = jtNombre.getText();
+            String detalle = jtDetalle.getText();
+            double calorias = Double.parseDouble(jtCalorias.getText());
+
+            Comida c = new Comida(nombre, detalle, calorias);
+            comidaData.guardarComida(c);
+
+            jtId.setText(c.getId()+"");
+
+            btActualizar.setEnabled(true);
+            btBorrar.setEnabled(true);
+            btLimpiar.setEnabled(true);
+            
+            jtMensaje.setText("COMIDA GUARDADA");
+            
+        }catch (NumberFormatException ex){
+            jtMensaje.setText("COMIDA NO GUARDADA");
+        }
         
     }//GEN-LAST:event_btGuardarActionPerformed
 
@@ -261,10 +294,12 @@ public class VistaComidas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jtCalorias;
     private javax.swing.JTextArea jtDetalle;
     private javax.swing.JTextField jtId;
+    private javax.swing.JTextField jtMensaje;
     private javax.swing.JTextField jtNombre;
     // End of variables declaration//GEN-END:variables
 }
