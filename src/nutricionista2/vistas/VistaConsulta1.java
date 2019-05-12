@@ -57,6 +57,8 @@ public class VistaConsulta1 extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tComidas = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jtMensaje = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -90,6 +92,11 @@ public class VistaConsulta1 extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
+        jLabel3.setText("ESTADO:");
+
+        jtMensaje.setForeground(new java.awt.Color(255, 0, 51));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -102,6 +109,10 @@ public class VistaConsulta1 extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(134, 134, 134)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(jtMensaje))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
@@ -111,7 +122,7 @@ public class VistaConsulta1 extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addGap(247, 247, 247))
+                .addGap(246, 246, 246))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,9 +134,13 @@ public class VistaConsulta1 extends javax.swing.JInternalFrame {
                     .addComponent(jLabel2)
                     .addComponent(jtCalorias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jtMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -139,9 +154,15 @@ public class VistaConsulta1 extends javax.swing.JInternalFrame {
         int calorias = Integer.parseInt(jtCalorias.getText());
         listaComidas = (ArrayList)comidaData.buscarComidaConCaloriasMenoresA(calorias);
         
-        for(Comida c:listaComidas){
-        
-            modelo.addRow(new Object[]{c.getId(),c.getNombre()});
+        if (!listaComidas.isEmpty()){
+            for(Comida c:listaComidas){
+
+                modelo.addRow(new Object[]{c.getId(),c.getNombre()});
+            }
+            jtMensaje.setText("");
+            
+        }else{
+            jtMensaje.setText("NO SE ENCONTRARON RESULTADOS");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -150,8 +171,10 @@ public class VistaConsulta1 extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jtCalorias;
+    private javax.swing.JTextField jtMensaje;
     private javax.swing.JTable tComidas;
     // End of variables declaration//GEN-END:variables
 
