@@ -7,6 +7,7 @@ package nutricionista2.vistas;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -101,6 +102,9 @@ public class VistaDieta extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jtPesoInicial = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jtMensaje = new javax.swing.JTextField();
+        jbLimpiar = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -202,37 +206,48 @@ public class VistaDieta extends javax.swing.JInternalFrame {
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setText("PESO INICIAL:");
 
+        jLabel10.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
+        jLabel10.setText("ESTADO:");
+
+        jtMensaje.setForeground(new java.awt.Color(255, 51, 51));
+
+        jbLimpiar.setText("LIMPIAR");
+        jbLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbLimpiarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel9))
+                        .addGap(44, 44, 44)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel9))
-                                .addGap(44, 44, 44)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jtFecFinal)
-                                    .addComponent(jtPesoBuscado)
-                                    .addComponent(jtFecInicio)
-                                    .addComponent(cbPacientes, 0, 146, Short.MAX_VALUE)
-                                    .addComponent(jtPesoInicial)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jbGuardar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
-                                .addComponent(jbActualizar)
-                                .addGap(25, 25, 25))))
+                            .addComponent(jtFecFinal)
+                            .addComponent(jtPesoBuscado)
+                            .addComponent(jtFecInicio)
+                            .addComponent(cbPacientes, 0, 146, Short.MAX_VALUE)
+                            .addComponent(jtPesoInicial)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(146, 146, 146)
-                        .addComponent(jbBorrar)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jbBorrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jbGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jbActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jbLimpiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(25, 25, 25)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(58, 58, 58)
@@ -252,7 +267,13 @@ public class VistaDieta extends javax.swing.JInternalFrame {
                                     .addComponent(jbQuitar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(28, 28, 28)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(26, 26, 26))))
+                        .addGap(26, 26, 26))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(91, 91, 91)
+                        .addComponent(jLabel10)
+                        .addGap(29, 29, 29)
+                        .addComponent(jtMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel6)
@@ -283,23 +304,26 @@ public class VistaDieta extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
                             .addComponent(jtPesoInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(jtPesoBuscado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jbGuardar)
-                            .addComponent(jbActualizar))
-                        .addGap(18, 18, 18)
-                        .addComponent(jbBorrar)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jbActualizar)))
+                    .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addGap(23, 23, 23))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbBorrar)
+                    .addComponent(jLabel10)
+                    .addComponent(jtMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbLimpiar))
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addComponent(jLabel6)
@@ -393,26 +417,65 @@ public class VistaDieta extends javax.swing.JInternalFrame {
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         // TODO add your handling code here:
-        LocalDate fecIni = LocalDate.parse(jtFecInicio.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        LocalDate fecFin = LocalDate.parse(jtFecFinal.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        double pesoInicial = Double.parseDouble(jtPesoInicial.getText());
-        double pesoBuscado = Double.parseDouble(jtPesoBuscado.getText());
+        try{
+            LocalDate fecIni = LocalDate.parse(jtFecInicio.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            LocalDate fecFin = LocalDate.parse(jtFecFinal.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            
+            try{
+                double pesoInicial = Double.parseDouble(jtPesoInicial.getText());
+                double pesoBuscado = Double.parseDouble(jtPesoBuscado.getText());
                 
-        Dieta dieta = new Dieta(paciente, fecIni, fecFin, pesoInicial, pesoBuscado, listaComidasXPaciente);
-        dietaData.guardarPerfilDeDieta(dieta);
+                if (!listaComidasXPaciente.isEmpty() && (fecFin.isAfter(fecIni))){
+                    Dieta dieta = new Dieta(paciente, fecIni, fecFin, pesoInicial, pesoBuscado, listaComidasXPaciente);
+                    dietaData.guardarPerfilDeDieta(dieta);
+
+                    jtMensaje.setText("DIETA GUARDADA");
+                    jbBorrar.setEnabled(true);
+                    jbActualizar.setEnabled(true);
+                    
+                }else{
+                    jtMensaje.setText("DIETA NO GUARDADO");
+                }
+                
+            }catch(NumberFormatException ex){
+                jtMensaje.setText("DIETA NO GUARDADO");
+            }
+            
+        }catch (DateTimeParseException ex){
+            jtMensaje.setText("DIETA NO GUARDADO");
+        }
                 
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
         // TODO add your handling code here:
-        LocalDate fecIni = LocalDate.parse(jtFecInicio.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        LocalDate fecFin = LocalDate.parse(jtFecFinal.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        double pesoInicial = Double.parseDouble(jtPesoInicial.getText());
-        double pesoBuscado = Double.parseDouble(jtPesoBuscado.getText());
+        try{
+            LocalDate fecIni = LocalDate.parse(jtFecInicio.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            LocalDate fecFin = LocalDate.parse(jtFecFinal.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            
+            try{
+                double pesoInicial = Double.parseDouble(jtPesoInicial.getText());
+                double pesoBuscado = Double.parseDouble(jtPesoBuscado.getText());
+
+                Dieta dieta1 = dietaData.buscarDietaXPaciente(paciente.getId());
                 
-        Dieta dieta1 = dietaData.buscarDietaXPaciente(paciente.getId());
-        Dieta dieta2 = new Dieta(dieta1.getId(), paciente, fecIni, fecFin, pesoInicial, pesoBuscado, listaComidasXPaciente);
-        dietaData.actualizarDietaDeUnPaciente(dieta2);
+                if (!listaComidasXPaciente.isEmpty() && (fecFin.isAfter(fecIni))){
+                    Dieta dieta2 = new Dieta(dieta1.getId(), paciente, fecIni, fecFin, pesoInicial, pesoBuscado, listaComidasXPaciente);
+                    dietaData.actualizarDietaDeUnPaciente(dieta2);
+                    
+                    jtMensaje.setText("DIETA ACTUALIZADA");
+                    
+                }else{
+                    jtMensaje.setText("DIETA NO ACTUALIZADA");
+                }
+                
+            }catch(NumberFormatException ex){
+                jtMensaje.setText("DIETA NO ACTUALIZADA");
+            }
+            
+        }catch (DateTimeParseException ex){
+            jtMensaje.setText("DIETA NO ACTUALIZADA");
+        }
         
     }//GEN-LAST:event_jbActualizarActionPerformed
 
@@ -420,12 +483,25 @@ public class VistaDieta extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         Dieta dieta = dietaData.buscarDietaXPaciente(paciente.getId());
         dietaData.borrarDietaDeUnPaciente(dieta.getId());
+
+        jtMensaje.setText("DIETA BORRADA");
+        
     }//GEN-LAST:event_jbBorrarActionPerformed
+
+    private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
+        // TODO add your handling code here:
+        jtFecFinal.setText("");
+        jtFecInicio.setText("");
+        jtMensaje.setText("");
+        jtPesoBuscado.setText("");
+        jtPesoInicial.setText("");
+    }//GEN-LAST:event_jbLimpiarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<Paciente> cbPacientes;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -440,9 +516,11 @@ public class VistaDieta extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbAgregar;
     private javax.swing.JButton jbBorrar;
     private javax.swing.JButton jbGuardar;
+    private javax.swing.JButton jbLimpiar;
     private javax.swing.JButton jbQuitar;
     private javax.swing.JTextField jtFecFinal;
     private javax.swing.JTextField jtFecInicio;
+    private javax.swing.JTextField jtMensaje;
     private javax.swing.JTextField jtPesoBuscado;
     private javax.swing.JTextField jtPesoInicial;
     private javax.swing.JTable jtTablaComidasNoSelec;
