@@ -41,9 +41,9 @@ public class Nutricionista2 {
 //              pacienteData.actualizarPaciente(paciente);
 //            
             // Baja de un Paciente
-              Paciente paciente = pacienteData.buscarPaciente(10);
+//              Paciente paciente = pacienteData.buscarPaciente(10);
               
-              pacienteData.borrarPaciente(paciente.getId());
+              pacienteData.borrarPaciente(30);
 
             // Consulta a la base de datos del listado de pacientes
 //            pacienteData.obtenerPacientes().forEach(p -> {

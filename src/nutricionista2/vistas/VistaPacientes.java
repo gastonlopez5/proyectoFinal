@@ -278,7 +278,7 @@ public class VistaPacientes extends javax.swing.JInternalFrame {
                 pacienteData.guardarPaciente(p);
 
                 jtId.setText(p.getId()+"");
-                jtMensaje.setText("PACIENTE GARDADO");
+                jtMensaje.setText("PACIENTE GUARDADO");
             
                 jbBorrar.setEnabled(true);
                 jbActualizar.setEnabled(true);
@@ -297,14 +297,18 @@ public class VistaPacientes extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         int id = Integer.parseInt(jtId.getText());
         
-        try{
+//        try{
+        if (pacienteData.buscarPaciente(id) != null){
             pacienteData.borrarPaciente(id);
         
             jtMensaje.setText("PACIENTE BORRADO");
-            
-        }catch (NullPointerException ex){
+        }else{
             jtMensaje.setText("PACIENTE NO ENCONTRADO. ID NO VALIDO");
         }
+        
+//        }catch (NullPointerException ex){
+//            jtMensaje.setText("PACIENTE NO ENCONTRADO. ID NO VALIDO");
+//        }
     }//GEN-LAST:event_jbBorrarActionPerformed
 
     private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed

@@ -235,19 +235,24 @@ public class VistaComidas extends javax.swing.JInternalFrame {
             String nombre = jtNombre.getText();
             String detalle = jtDetalle.getText();
             double calorias = Double.parseDouble(jtCalorias.getText());
-
-            Comida c = new Comida(nombre, detalle, calorias);
-            comidaData.guardarComida(c);
-
-            jtId.setText(c.getId()+"");
-
-            btActualizar.setEnabled(true);
-            btBorrar.setEnabled(true);
-            btLimpiar.setEnabled(true);
             
-            jtMensaje.setText("COMIDA GUARDADA");
+            if (!(nombre.isEmpty() || detalle.isEmpty())){
+                Comida c = new Comida(nombre, detalle, calorias);
+                comidaData.guardarComida(c);
+
+                jtId.setText(c.getId()+"");
+
+                btActualizar.setEnabled(true);
+                btBorrar.setEnabled(true);
+                btLimpiar.setEnabled(true);
+
+                jtMensaje.setText("COMIDA GUARDADA");
             
-        }catch (NumberFormatException ex){
+            }else{
+                jtMensaje.setText("COMIDA NO GUARDADA");
+            }
+            
+        } catch (NumberFormatException ex){
             jtMensaje.setText("COMIDA NO GUARDADA");
         }
         
@@ -256,21 +261,40 @@ public class VistaComidas extends javax.swing.JInternalFrame {
     private void btBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBorrarActionPerformed
         // TODO add your handling code here:
         int id = Integer.parseInt(jtId.getText());
-        comidaData.borrarComida(id);
+            
+//        try{
+        if (comidaData.buscarComida(id) != null){
+            comidaData.borrarComida(id);
+            
+            jtMensaje.setText("COMIDA BORRADA");
+        
+        } else {
+            jtMensaje.setText("COMIDA NO ENCONTRADA. ID NO VALIDO");
+        }
+//        }catch (NullPointerException ex) {
+//            jtMensaje.setText("COMIDA NO ENCONTRADA. ID NO VALIDO");
+//        }
     }//GEN-LAST:event_btBorrarActionPerformed
 
     private void btActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btActualizarActionPerformed
         // TODO add your handling code here:
-        if (jtId.getText()!= null){
-            
+        try{    
             int id = Integer.parseInt(jtId.getText());
             String nombre = jtNombre.getText();
             String detalle = jtDetalle.getText();
             double calorias = Double.parseDouble(jtCalorias.getText());
+            
+            if (!(nombre.isEmpty() || detalle.isEmpty())){
+                Comida c = new Comida(id, nombre, detalle, calorias);
+                comidaData.actualizarComida(c);
+                
+                jtMensaje.setText("COMIDA ACTUALIZADA");
+            }else{
+                jtMensaje.setText("COMIDA NO ACTUALIZADA");
+            }
         
-            Comida c = new Comida(id, nombre, detalle, calorias);
-            comidaData.actualizarComida(c);
-        
+        } catch (NumberFormatException ex){
+            jtMensaje.setText("ERROR AL ACTUALIZAR LA COMIDA");
         }
     }//GEN-LAST:event_btActualizarActionPerformed
 
@@ -280,6 +304,7 @@ public class VistaComidas extends javax.swing.JInternalFrame {
         jtNombre.setText("");
         jtDetalle.setText("");
         jtCalorias.setText("");
+        jtMensaje.setText("");
     }//GEN-LAST:event_btLimpiarActionPerformed
 
 
