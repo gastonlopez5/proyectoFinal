@@ -71,14 +71,15 @@ public class DietaData {
         
     }
     
-    public List<Comida> obtenerComidasXPaciente(int idPaciente){
+    public List<Comida> obtenerComidasXPaciente(int idPaciente, LocalDate fechIni){
         List<Comida> comidas = new ArrayList<>();
             
 
         try {
-            String sql = "SELECT comida.idComida, comida.nombre, comida.detalle, comida.calorias FROM paciente, dieta, dieta_comida, comida WHERE paciente.idPaciente = dieta.idPaciente AND dieta.idDieta = dieta_comida.idDieta AND dieta_comida.idComida = comida.idComida AND paciente.idPaciente =?;";
+            String sql = "SELECT comida.idComida, comida.nombre, comida.detalle, comida.calorias FROM paciente, dieta, dieta_comida, comida WHERE paciente.idPaciente = dieta.idPaciente AND dieta.idDieta = dieta_comida.idDieta AND dieta_comida.idComida = comida.idComida AND paciente.idPaciente =? AND fechaInicial =?;";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, idPaciente);
+            statement.setString(2, fechIni.toString());
             ResultSet resultSet = statement.executeQuery();
             Comida comida;
             while(resultSet.next()){
@@ -272,9 +273,9 @@ public class DietaData {
         return dieta;
     }
     
-    public Dieta buscarDietaXPaciente(int idPaciente){
+    public List<Dieta> buscarDietasXPaciente(int idPaciente){
     
-    Dieta dieta = null;
+    List<Dieta> dietas = new ArrayList<Dieta>();
     try {
             
             String sql = "SELECT * FROM dieta WHERE idPaciente =?;";
@@ -282,6 +283,40 @@ public class DietaData {
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setInt(1, idPaciente);
            
+            
+            ResultSet resultSet=statement.executeQuery();
+            
+            Dieta dieta;
+            while(resultSet.next()){
+                dieta = new Dieta();
+                dieta.setId(resultSet.getInt("idDieta"));
+                dieta.setPaciente(buscarPaciente(resultSet.getInt("idPaciente")));
+                dieta.setFechaInicial(resultSet.getDate("fechaInicial").toLocalDate());
+                dieta.setFechaFinal(resultSet.getDate("fechaFinal").toLocalDate());
+                dieta.setPesoInicial(resultSet.getDouble("pesoInicial"));
+                dieta.setPesoBuscado(resultSet.getDouble("pesoBuscado"));
+                
+                dietas.add(dieta);
+            }      
+            statement.close();
+         
+        } catch (SQLException ex) {
+            System.out.println("Error al encontrar una dieta: " + ex.getMessage());
+        }
+        
+        return dietas;
+    }
+    
+    public Dieta buscarDietaXPaciente(int idPaciente, LocalDate fechIni){
+    
+    Dieta dieta = null;
+    try {
+            
+            String sql = "SELECT * FROM dieta WHERE idPaciente =? AND fechaInicial =?;";
+
+            PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            statement.setInt(1, idPaciente);
+            statement.setString(2, fechIni.toString());
             
             ResultSet resultSet=statement.executeQuery();
             
@@ -297,10 +332,40 @@ public class DietaData {
             statement.close();
          
         } catch (SQLException ex) {
-            System.out.println("Error al encontrar una comida: " + ex.getMessage());
+            System.out.println("Error al encontrar una dieta: " + ex.getMessage());
         }
         
         return dieta;
     }
     
+//    public Dieta buscarDietaXPaciente(int idPaciente){
+//    
+//    Dieta dieta = null;
+//    try {
+//            
+//            String sql = "SELECT * FROM dieta WHERE idPaciente =?;";
+//
+//            PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+//            statement.setInt(1, idPaciente);
+//           
+//            
+//            ResultSet resultSet=statement.executeQuery();
+//            
+//            while(resultSet.next()){
+//                dieta = new Dieta();
+//                dieta.setId(resultSet.getInt("idDieta"));
+//                dieta.setPaciente(buscarPaciente(resultSet.getInt("idPaciente")));
+//                dieta.setFechaInicial(resultSet.getDate("fechaInicial").toLocalDate());
+//                dieta.setFechaFinal(resultSet.getDate("fechaFinal").toLocalDate());
+//                dieta.setPesoInicial(resultSet.getDouble("pesoInicial"));
+//                dieta.setPesoBuscado(resultSet.getDouble("pesoBuscado"));
+//            }      
+//            statement.close();
+//         
+//        } catch (SQLException ex) {
+//            System.out.println("Error al encontrar una comida: " + ex.getMessage());
+//        }
+//        
+//        return dieta;
+//    }
 }

@@ -92,10 +92,12 @@ public class PacienteData {
     public void borrarPaciente(int id){
         
         dietaData = new DietaData(conexion);
-        Dieta dieta = dietaData.buscarDietaXPaciente(id);
+        List<Dieta> dietas = dietaData.buscarDietasXPaciente(id);
         
-        if (dieta != null){
-            dietaData.borrarDietaDeUnPaciente(dieta.getId());
+        for(Dieta dieta: dietas){
+            if (dieta != null){
+                dietaData.borrarDietaDeUnPaciente(dieta.getId());
+            }
         }
         
         try {

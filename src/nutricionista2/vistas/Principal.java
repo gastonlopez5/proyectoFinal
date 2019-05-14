@@ -5,7 +5,9 @@
  */
 package nutricionista2.vistas;
 
-import java.awt.Image;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import nutricionista2.vistas.VistaConsulta1;
 
@@ -20,7 +22,7 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
     }
 
     /**

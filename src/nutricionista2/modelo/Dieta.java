@@ -98,6 +98,6 @@ public class Dieta {
     public void setComidas(List<Comida> comidas) {
         this.comidas = comidas;
     }
-
+    
     
 }

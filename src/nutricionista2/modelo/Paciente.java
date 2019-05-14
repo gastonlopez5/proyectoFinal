@@ -85,7 +85,7 @@ public class Paciente {
         this.pesoActual = pesoActual;
     }
     
-     public String toString(){
+    public String toString(){
     
         return id+"-"+nombre;
     }    

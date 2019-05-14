@@ -26,7 +26,7 @@ public class Nutricionista2 {
             conexion = new Conexion("jdbc:mysql://localhost/nutricionista2", "root", "");
             
             // ABM Paciente
-              PacienteData pacienteData = new PacienteData(conexion);
+//              PacienteData pacienteData = new PacienteData(conexion);
               
             // Alta de un Paciente
 //              
@@ -43,7 +43,7 @@ public class Nutricionista2 {
             // Baja de un Paciente
 //              Paciente paciente = pacienteData.buscarPaciente(10);
               
-              pacienteData.borrarPaciente(30);
+//              pacienteData.borrarPaciente(30);
 
             // Consulta a la base de datos del listado de pacientes
 //            pacienteData.obtenerPacientes().forEach(p -> {
@@ -80,7 +80,7 @@ public class Nutricionista2 {
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             
             // ABM Dieta
-//            DietaData dietaData = new DietaData(conexion);
+            DietaData dietaData = new DietaData(conexion);
 //            PacienteData pacienteData = new PacienteData(conexion);
 //            ComidaData comidaData = new ComidaData(conexion);
             
@@ -110,6 +110,10 @@ public class Nutricionista2 {
             // Baja de una Dieta
 //            dietaData.borrarDietaDeUnPaciente(7);
 
+            // Busqueda de una dieta de un paciente
+            Dieta dieta = dietaData.buscarDietaXPaciente(1, LocalDate.of(2019,4,8));
+            System.out.println("idDieta = "+dieta.getId());
+            
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             // Consulta a la BD de los pacientes que al día de la fecha no alcanzaron el pesoBuscado
 //            DietaData dietaData = new DietaData(conexion);
