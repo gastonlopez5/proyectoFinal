@@ -155,6 +155,18 @@ public class VistaDieta extends javax.swing.JInternalFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("PESO BUSCADO:");
 
+        jtFecInicio.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtFecInicioFocusLost(evt);
+            }
+        });
+
+        jtFecFinal.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtFecFinalFocusLost(evt);
+            }
+        });
+
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("PESO INICIAL:");
 
@@ -339,8 +351,8 @@ public class VistaDieta extends javax.swing.JInternalFrame {
                         .addGap(11, 11, 11)
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(31, Short.MAX_VALUE))
+                        .addComponent(jtMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(16, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -356,7 +368,7 @@ public class VistaDieta extends javax.swing.JInternalFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jtCalorias, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(jLabel11)))
-                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addGap(18, 36, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
@@ -369,7 +381,7 @@ public class VistaDieta extends javax.swing.JInternalFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(jtSumaCalorias, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE))))))
+                                .addGap(0, 14, Short.MAX_VALUE))))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(397, 397, 397)
                 .addComponent(jLabel1)
@@ -391,7 +403,7 @@ public class VistaDieta extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
@@ -678,6 +690,7 @@ public class VistaDieta extends javax.swing.JInternalFrame {
             jtFecInicio.setText("");
             jtPesoBuscado.setText("");
             jtPesoInicial.setText("");
+            jtSumaCalorias.setText("");
 
             borrarFilasTablaNoSelec();
             borrarFilasTablaSelec();
@@ -769,6 +782,41 @@ public class VistaDieta extends javax.swing.JInternalFrame {
         cargarComidas();
         listaComidasXPaciente = (ArrayList)dietaData.obtenerComidasXPaciente(paciente.getId(), LocalDate.of(2090,05,04));
     }//GEN-LAST:event_jbVolverActionPerformed
+
+    private void jtFecInicioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtFecInicioFocusLost
+        // TODO add your handling code here:
+        try{
+            LocalDate fec = LocalDate.parse(jtFecInicio.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            if (fec.isBefore(LocalDate.now())){
+                jtMensaje.setText("FECHA ANTERIIOR AL DIA DE HOY. INGRESE FECHA NUEVAMENTE");
+                jtFecInicio.requestFocus();
+            }else{
+                jtMensaje.setText("");
+            }
+        }catch(DateTimeParseException ex){
+            jtMensaje.setText("FORMATO DE FECHA INCORRECTO. INGRESE FECHA NUEVAMENTE");
+//            jtFecInicio.requestFocus();
+        }
+    }//GEN-LAST:event_jtFecInicioFocusLost
+
+    private void jtFecFinalFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtFecFinalFocusLost
+        // TODO add your handling code here:
+        LocalDate fecI = LocalDate.parse(jtFecInicio.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        try{
+            LocalDate fecf = LocalDate.parse(jtFecFinal.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            
+            if (fecf.isBefore(fecI)){
+                jtMensaje.setText("FECHA ANTERIOR A LA INICIAL. INGRESE FECHA NUEVAMENTE");
+                jtFecFinal.requestFocus();
+            
+            }else{
+                jtMensaje.setText("");
+            }
+        }catch(DateTimeParseException ex){
+            jtMensaje.setText("FORMATO DE FECHA INCORRECTO. INGRESE FECHA NUEVAMENTE");
+//            jtFecFinal.requestFocus();
+        }
+    }//GEN-LAST:event_jtFecFinalFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
