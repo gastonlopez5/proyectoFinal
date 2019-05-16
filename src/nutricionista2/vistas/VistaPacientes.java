@@ -101,6 +101,18 @@ public class VistaPacientes extends javax.swing.JInternalFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("PESO ACTUAL:");
 
+        jtDni.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtDniFocusLost(evt);
+            }
+        });
+
+        jtCelular.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtCelularFocusLost(evt);
+            }
+        });
+
         jbGuardar.setText("GUARDAR");
         jbGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -149,18 +161,23 @@ public class VistaPacientes extends javax.swing.JInternalFrame {
                 .addGap(33, 33, 33)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13)
+                .addComponent(jtCelular)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel7)
                 .addGap(18, 18, 18)
-                .addComponent(jtPeso)
+                .addComponent(jtPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(137, 137, 137))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jbGuardar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                        .addComponent(jbBorrar)
+                        .addGap(30, 30, 30)
+                        .addComponent(jbActualizar)
+                        .addGap(26, 26, 26)
+                        .addComponent(jbLimpiar))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,22 +193,18 @@ public class VistaPacientes extends javax.swing.JInternalFrame {
                                 .addComponent(btBuscar))
                             .addComponent(jtNombre)
                             .addComponent(jtDni)
-                            .addComponent(jtDomicilio)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jbGuardar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbBorrar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbActualizar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jbLimpiar))
+                            .addComponent(jtDomicilio))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel8)
                         .addGap(18, 18, 18)
                         .addComponent(jtMensaje)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(152, 152, 152))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -221,7 +234,7 @@ public class VistaPacientes extends javax.swing.JInternalFrame {
                     .addComponent(jLabel7)
                     .addComponent(jtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbGuardar)
                     .addComponent(jbBorrar)
@@ -346,6 +359,26 @@ public class VistaPacientes extends javax.swing.JInternalFrame {
         jtMensaje.setText("");
         
     }//GEN-LAST:event_jbLimpiarActionPerformed
+
+    private void jtDniFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtDniFocusLost
+        // TODO add your handling code here:
+        if (jtDni.getText().length() != 8){
+            jtMensaje.setText("DNI INCORRECTO. INGRESE EL VALOR NUEVAMENTE");
+            jtDni.requestFocus();
+        }else{
+            jtMensaje.setText("");
+        }
+    }//GEN-LAST:event_jtDniFocusLost
+
+    private void jtCelularFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtCelularFocusLost
+        // TODO add your handling code here:
+        if (jtCelular.getText().length() != 10){
+            jtMensaje.setText("CELULAR INCORRECTO. INGRESE EL VALOR NUEVAMENTE");
+            jtCelular.requestFocus();
+        }else{
+            jtMensaje.setText("");
+        }
+    }//GEN-LAST:event_jtCelularFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
